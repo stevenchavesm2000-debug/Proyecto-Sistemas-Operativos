@@ -1,0 +1,313 @@
+/* Reset y estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f7f9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header y navegación */
+header {
+    background: #1a2a3a;
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    color: #4fc3f7;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+    color: #4fc3f7;
+}
+
+/* Secciones generales */
+.section {
+    padding: 4rem 0;
+}
+
+.bg-light {
+    background-color: #e8edf2;
+}
+
+.section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem;
+    color: #1a2a3a;
+    position: relative;
+}
+
+.section h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #4fc3f7;
+    margin: 0.5rem auto 0;
+}
+
+/* Hero / Inicio */
+.hero {
+    background: linear-gradient(135deg, #1a2a3a 0%, #2c4a6a 100%);
+    color: white;
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: #4fc3f7;
+    color: #1a2a3a;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s;
+    font-size: 1.1rem;
+}
+
+.btn:hover {
+    background: #29b6f6;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(79, 195, 247, 0.4);
+}
+
+/* Grid de contenido */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.text-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+.text-content ul li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #e0e6ed;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.text-content ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #4fc3f7;
+    font-weight: bold;
+}
+
+.image-placeholder {
+    background: #dce3ed;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #8aa3bb;
+}
+
+.placeholder-box {
+    font-size: 1.1rem;
+    color: #5a7a9a;
+}
+
+/* Pasos del proceso */
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.step {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.step:hover {
+    transform: translateY(-5px);
+}
+
+.step-number {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: #4fc3f7;
+    color: #1a2a3a;
+    border-radius: 50%;
+    line-height: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.step h3 {
+    margin-bottom: 0.5rem;
+    color: #1a2a3a;
+}
+
+/* Proyecto */
+.project-info {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+.project-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature {
+    padding: 1.5rem;
+    background: #f4f7f9;
+    border-radius: 8px;
+    border-left: 4px solid #4fc3f7;
+}
+
+.feature h4 {
+    color: #1a2a3a;
+    margin-bottom: 0.5rem;
+}
+
+/* Contacto */
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.contact-item {
+    background: white;
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+.contact-item h4 {
+    color: #4fc3f7;
+    margin-bottom: 0.5rem;
+}
+
+/* Footer */
+footer {
+    background: #1a2a3a;
+    color: #8aa3bb;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .nav-links {
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+
+    .section h2 {
+        font-size: 2rem;
+    }
+
+    .process-steps {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .project-features {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-info {
+        grid-template-columns: 1fr;
+    }
+}
