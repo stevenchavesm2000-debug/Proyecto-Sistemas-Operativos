@@ -1,0 +1,1 @@
+0 */12 * * * root /home/steven/Proyectos/Proyecto-Sistemas-Operativos/scripts/backup_db.sh >> /var/log/aeromap_backup_cron.log 2>&1
