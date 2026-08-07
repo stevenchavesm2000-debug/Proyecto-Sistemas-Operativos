@@ -108,19 +108,25 @@ Proyecto-Sistemas-Operativos/
 ## Estado actual
 
 - [x] Repositorio público creado
-- [x] Ubuntu instalado
+- [x] Ubuntu instalado y documentado
 - [x] Git configurado
 - [x] Apache instalado
-- [x] Sitio `empresa.local` creado
-- [x] Virtual Host `empresa.local` funcionando
-- [ ] Sitio `curso.local`
-- [ ] Base de datos
-- [ ] Script de respaldo
-- [ ] Cron de respaldos
-- [ ] Monitor de recursos
-- [ ] Cron del monitor
-- [ ] Evidencias finales
-- [ ] Presentación
+- [x] Sitio `empresa.local`
+- [x] Virtual Host de `empresa.local`
+- [x] Sitio `curso.local`
+- [x] Virtual Host de `curso.local`
+- [x] Base de datos `aeromap_db`
+- [x] Tablas y registros de prueba
+- [x] Script de respaldo
+- [x] Compresión y logs del respaldo
+- [x] Cron de respaldos cada doce horas
+- [x] Monitor de CPU, RAM y disco
+- [x] Identificación de procesos y PID
+- [x] Log del monitor
+- [x] Cron del monitor cada minuto
+- [x] Documentación técnica en Markdown
+- [ ] Organización final de capturas
+- [ ] Presentación del proyecto
 - [ ] Defensa del proyecto
 
 ## Pruebas realizadas
@@ -160,3 +166,17 @@ yadiel/monitor-recursos
 
 Los cambios se integran a `main` mediante Pull Requests.# Proyecto-Sistemas-Operativos
 Servidor Linux con Apache, Virtual Hosts, base de datos, monitoreo de recursos y documentación en Markdown.
+
+## Logs generados
+
+El sistema utiliza los siguientes registros:
+
+```text
+/var/log/apache2/empresa.local-access.log
+/var/log/apache2/empresa.local-error.log
+/var/log/apache2/curso.local-access.log
+/var/log/apache2/curso.local-error.log
+/var/log/aeromap_backup.log
+/var/log/aeromap_backup_cron.log
+/var/log/aeromap_monitor.log
+/var/log/aeromap_monitor_cron.log
