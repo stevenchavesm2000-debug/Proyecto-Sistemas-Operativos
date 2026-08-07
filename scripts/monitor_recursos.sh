@@ -167,4 +167,5 @@ fi
 
 registrar "============================================================"
 
+/home/steven/Proyectos/Proyecto-Sistemas-Operativos/scripts/actualizar_dashboard.sh || true
 exit 0

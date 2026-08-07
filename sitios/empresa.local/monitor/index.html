@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Monitor AeroMap</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #e8f7f4;
+            background:
+                radial-gradient(circle at top right, #165d63, transparent 35%),
+                linear-gradient(135deg, #061c22, #0b343d);
+        }
+
+        .contenedor {
+            width: 92%;
+            max-width: 1250px;
+            margin: auto;
+            padding: 45px 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        h1 {
+            font-size: clamp(30px, 5vw, 52px);
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #a9cac6;
+        }
+
+        .estado {
+            padding: 12px 20px;
+            border: 1px solid #49d5bc;
+            border-radius: 30px;
+            font-weight: bold;
+            background-color: rgba(73, 213, 188, 0.12);
+        }
+
+        .estado.alerta {
+            color: #ffd4d4;
+            border-color: #ff6e6e;
+            background-color: rgba(255, 77, 77, 0.16);
+        }
+
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .tarjeta,
+        .tabla-contenedor {
+            padding: 28px;
+            border: 1px solid rgba(126, 224, 207, 0.18);
+            border-radius: 18px;
+            background-color: rgba(255, 255, 255, 0.055);
+            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.22);
+        }
+
+        .tarjeta h2 {
+            color: #9fe6da;
+            font-size: 17px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .porcentaje {
+            margin: 25px 0 14px;
+            font-size: 54px;
+            font-weight: bold;
+        }
+
+        .barra {
+            height: 11px;
+            overflow: hidden;
+            border-radius: 20px;
+            background-color: #173f46;
+        }
+
+        .barra span {
+            display: block;
+            width: 0;
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #25bfa8, #72e4cf);
+            transition: width 0.6s ease;
+        }
+
+        .detalle {
+            margin-top: 14px;
+            color: #aac9c5;
+        }
+
+        .tabla-contenedor {
+            margin-top: 25px;
+        }
+
+        .tabla-contenedor h2 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+        }
+
+        th {
+            color: #86ddce;
+        }
+
+        .pie {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 25px;
+            color: #a9c7c4;
+        }
+
+        .error {
+            color: #ffaaaa;
+        }
+
+        @media (max-width: 850px) {
+            header,
+            .pie {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .tarjetas {
+                grid-template-columns: 1fr;
+            }
+
+            .tabla-contenedor {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="contenedor">
+
+    <header>
+        <div>
+            <h1>Monitor AeroMap</h1>
+            <p>Panel visual del monitor Bash de recursos del servidor</p>
+        </div>
+
+        <div id="estado" class="estado">
+            Cargando...
+        </div>
+    </header>
+
+    <main>
+        <section class="tarjetas">
+
+            <article class="tarjeta">
+                <h2>Procesador</h2>
+                <div id="cpu-uso" class="porcentaje">--%</div>
+
+                <div class="barra">
+                    <span id="cpu-barra"></span>
+                </div>
+
+                <p id="cpu-limite" class="detalle">Límite: 80%</p>
+            </article>
+
+            <article class="tarjeta">
+                <h2>Memoria RAM</h2>
+                <div id="ram-uso" class="porcentaje">--%</div>
+
+                <div class="barra">
+                    <span id="ram-barra"></span>
+                </div>
+
+                <p id="ram-limite" class="detalle">Límite: 80%</p>
+            </article>
+
+            <article class="tarjeta">
+                <h2>Disco</h2>
+                <div id="disco-uso" class="porcentaje">--%</div>
+
+                <div class="barra">
+                    <span id="disco-barra"></span>
+                </div>
+
+                <p id="disco-limite" class="detalle">Límite: 90%</p>
+            </article>
+
+        </section>
+
+        <section class="tabla-contenedor">
+            <h2>Procesos detectados</h2>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Recurso</th>
+                    <th>Proceso</th>
+                    <th>PID</th>
+                    <th>Consumo</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>CPU</td>
+                    <td id="cpu-proceso">--</td>
+                    <td id="cpu-pid">--</td>
+                    <td id="cpu-consumo">--</td>
+                </tr>
+
+                <tr>
+                    <td>RAM</td>
+                    <td id="ram-proceso">--</td>
+                    <td id="ram-pid">--</td>
+                    <td id="ram-consumo">--</td>
+                </tr>
+
+                <tr>
+                    <td>Disco</td>
+                    <td id="disco-proceso">--</td>
+                    <td id="disco-pid">--</td>
+                    <td id="disco-consumo">--</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer class="pie">
+        <span id="fecha">Última actualización: --</span>
+        <span id="mensaje">Leyendo el estado del servidor...</span>
+    </footer>
+
+</div>
+
+<script>
+    function actualizarTarjeta(nombre, informacion) {
+        document.getElementById(nombre + "-uso").textContent =
+            informacion.uso + "%";
+
+        document.getElementById(nombre + "-barra").style.width =
+            Math.min(informacion.uso, 100) + "%";
+
+        document.getElementById(nombre + "-limite").textContent =
+            "Límite configurado: " + informacion.limite + "%";
+    }
+
+    async function cargarEstado() {
+        const mensaje = document.getElementById("mensaje");
+
+        try {
+            const respuesta = await fetch(
+                "status.json?tiempo=" + Date.now(),
+                { cache: "no-store" }
+            );
+
+            if (!respuesta.ok) {
+                throw new Error("No se encontró status.json");
+            }
+
+            const datos = await respuesta.json();
+
+            actualizarTarjeta("cpu", datos.cpu);
+            actualizarTarjeta("ram", datos.ram);
+            actualizarTarjeta("disco", datos.disco);
+
+            document.getElementById("cpu-proceso").textContent =
+                datos.cpu.proceso;
+
+            document.getElementById("cpu-pid").textContent =
+                datos.cpu.pid;
+
+            document.getElementById("cpu-consumo").textContent =
+                datos.cpu.consumo + "%";
+
+            document.getElementById("ram-proceso").textContent =
+                datos.ram.proceso;
+
+            document.getElementById("ram-pid").textContent =
+                datos.ram.pid;
+
+            document.getElementById("ram-consumo").textContent =
+                datos.ram.consumo + "%";
+
+            document.getElementById("disco-proceso").textContent =
+                datos.disco.proceso;
+
+            document.getElementById("disco-pid").textContent =
+                datos.disco.pid;
+
+            document.getElementById("disco-consumo").textContent =
+                datos.disco.bytes + " bytes";
+
+            const estado = document.getElementById("estado");
+
+            estado.textContent =
+                datos.estado + " · " + datos.alertas + " alerta(s)";
+
+            estado.classList.toggle(
+                "alerta",
+                datos.estado === "ALERTA"
+            );
+
+            document.getElementById("fecha").textContent =
+                "Última actualización: " + datos.fecha;
+
+            mensaje.textContent =
+                "Información generada por monitor_recursos.sh";
+
+            mensaje.classList.remove("error");
+
+        } catch (error) {
+            mensaje.textContent =
+                "No se pudo cargar el estado del monitor.";
+
+            mensaje.classList.add("error");
+        }
+    }
+
+    cargarEstado();
+    setInterval(cargarEstado, 5000);
+</script>
+
+</body>
+</html>
