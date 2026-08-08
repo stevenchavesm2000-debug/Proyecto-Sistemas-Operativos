@@ -1,0 +1,1 @@
+* * * * * root /home/steven/Proyectos/Proyecto-Sistemas-Operativos/scripts/monitor_recursos.sh >> /var/log/aeromap_monitor_cron.log 2>&1
